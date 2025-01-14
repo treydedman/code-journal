@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#header {
+  max-width: 100%;
+  background-color: #4b2473;
+  color: white;
+  padding: 1em 3em;
+}
