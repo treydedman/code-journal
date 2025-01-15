@@ -1,11 +1,49 @@
-* {
-  box-sizing: border-box;
+body {
   margin: 0;
+  padding: 0;
+  background-color: #eee;
 }
 
-#header {
-  max-width: 100%;
+header {
+  padding: 0.01rem;
   background-color: #4b2473;
   color: white;
-  padding: 1em 3em;
+}
+
+.img-placeholder {
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  background-color: #dadada;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+}
+
+input,
+label,
+textarea {
+  width: 100%;
+  height: 2rem;
+  border-radius: 5px;
+  padding: 1.2rem 0;
+  margin-bottom: 2rem;
+}
+
+#notes {
+  height: 10rem;
+}
+
+.save-button {
+  display: flex;
+  background-color: #4b2473;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.save-button:hover {
+  background-color: #7b05e9;
 }

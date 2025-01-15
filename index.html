@@ -18,11 +18,31 @@
   <body>
     <header>
       <div class="container" id="header">
-        <h1>Code Journal</h1>
+        <h1 class="column-full">Code Journal</h1>
       </div>
     </header>
     <main class="container">
-      <div data-view="entry-form"></div>
+      <h1 class="column-full">New Entry</h1>
+      <div data-view="entry-form">
+        <form class="row">
+          <div class="column-half">
+            <img src="" alt="" class="img-placeholder" />
+          </div>
+          <div class="column-half">
+            <label for="title">Title</label><br />
+            <input id="title" type="text" name="title" required /><br />
+            <label for="url">Photo URL</label><br />
+            <input id="url" type="url" name="url" required />
+          </div>
+          <div class="column-full">
+            <label for="notes">Notes</label><br />
+            <textarea id="notes" name="notes " rows="5" required></textarea>
+          </div>
+          <div class="column-full">
+            <button type="submit" class="save-button">Save</button>
+          </div>
+        </form>
+      </div>
       <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>
