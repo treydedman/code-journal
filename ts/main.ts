@@ -27,9 +27,7 @@ $imgUrlInput.addEventListener('input', () => {
   const $newImgUrl = $imgUrlInput.value;
 
   // set the src attribute
-  $imgPreview.src =
-    $newImgUrl ||
-    'https://img.icons8.com/?size=100&id=qItA4cPLu8rh&format=png&color=c5c5c5';
+  $imgPreview.src = $newImgUrl || './images/placeholder-image-square.jpg';
   $imgPreview.alt =
     'updated preview image' || 'default placeholder image for journal entry';
 });
@@ -54,11 +52,10 @@ $form.addEventListener('submit', (event) => {
   data.entries.unshift(newEntry);
 
   // save updated data to localStorage
-  writeData(data);
+  writeData();
 
   // clear and reset form fields
-  $imgPreview.src =
-    'https://img.icons8.com/?size=100&id=qItA4cPLu8rh&format=png&color=c5c5c5';
+  $imgPreview.src = './images/placeholder-image-square.jpg';
   $imgPreview.alt = 'default placeholder image for journal entry';
   $form.reset();
 });
