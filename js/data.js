@@ -1,19 +1,17 @@
+'use strict';
 const data = {
   view: 'entry-form',
-  entries: [] as Entry[],
+  entries: [],
   editing: null,
   nextEntryId: 1,
 };
-
 // key for localStorage
 const localStorageKey = 'code-journal-data';
-
-function writeData(data: any): void {
+function writeData(data) {
   const dataJSON = JSON.stringify(data);
   localStorage.setItem(localStorageKey, dataJSON);
 }
-
-function loadData(): void {
+function loadData() {
   const dataJSON = localStorage.getItem(localStorageKey);
   if (dataJSON) {
     return JSON.parse(dataJSON);
@@ -22,5 +20,4 @@ function loadData(): void {
     data.nextEntryId = 1;
   }
 }
-
 loadData();

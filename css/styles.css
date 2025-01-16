@@ -10,23 +10,27 @@ header {
   color: white;
 }
 
+#new-entry {
+  margin: 0.75rem 0;
+}
+
 .img-placeholder {
   width: 100%;
-  height: 300px;
+  height: auto;
   text-align: center;
-  background-color: #dadada;
-  margin-bottom: 2rem;
+  background-color: #dfdfdf;
+  margin-bottom: 0.5rem;
   border-radius: 5px;
 }
 
 input,
-label,
 textarea {
   width: 100%;
   height: 2rem;
   border-radius: 5px;
-  padding: 1.2rem 0;
-  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #c5c5c5;
 }
 
 #notes {
