@@ -1,30 +1,13 @@
-// interface for entry object
-interface Entry {
-  entryID: number;
-  title: string;
-  imgUrl: string;
-  notes: string;
-}
-
-// interface for data object
-interface Data {
-  view: string;
-  entries: Entry[];
-  editing: Entry | null;
-  nextEntryId: number;
-}
-
+'use strict';
 // key for localStorage
 const localStorageKey = 'code-journal-data';
-
 // serialize and save to localStorage
-function writeData(): void {
+function writeData() {
   const dataJSON = JSON.stringify(data);
   localStorage.setItem(localStorageKey, dataJSON);
 }
-
 // load data from localStorage
-function loadData(): Data {
+function loadData() {
   const dataJSON = localStorage.getItem(localStorageKey);
   if (dataJSON) {
     return JSON.parse(dataJSON);
@@ -38,6 +21,5 @@ function loadData(): Data {
     };
   }
 }
-
 // load the data
 const data = loadData();
