@@ -10,10 +10,6 @@ header {
   color: white;
 }
 
-#new-entry {
-  margin: 0.75rem 0;
-}
-
 .img-placeholder {
   width: 100%;
   height: auto;
@@ -50,4 +46,62 @@ textarea {
 
 .save-button:hover {
   background-color: #7b05e9;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+#no-entries-message {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+#navbar a {
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.button {
+  display: flex;
+  background-color: #4b2473;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #7b05e9;
+}
+
+#navbar .new-button {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+#view-new-entry-link {
+  color: white;
+}
+
+#view-new-entry-link:hover,
+#view-new-entry-link:focus {
+  color: white;
 }

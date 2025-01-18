@@ -1,4 +1,3 @@
-// interface for entry object
 interface Entry {
   entryID: number;
   title: string;
@@ -6,7 +5,6 @@ interface Entry {
   notes: string;
 }
 
-// interface for data object
 interface Data {
   view: string;
   entries: Entry[];
@@ -14,24 +12,20 @@ interface Data {
   nextEntryId: number;
 }
 
-// key for localStorage
 const localStorageKey = 'code-journal-data';
 
-// serialize and save to localStorage
 function writeData(): void {
   const dataJSON = JSON.stringify(data);
   localStorage.setItem(localStorageKey, dataJSON);
 }
 
-// load data from localStorage
 function loadData(): Data {
   const dataJSON = localStorage.getItem(localStorageKey);
   if (dataJSON) {
     return JSON.parse(dataJSON);
   } else {
-    // if no data - initialize default data
     return {
-      view: 'entry-form',
+      view: 'entries',
       entries: [],
       editing: null,
       nextEntryId: 1,
@@ -39,5 +33,4 @@ function loadData(): Data {
   }
 }
 
-// load the data
 const data = loadData();
