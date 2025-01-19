@@ -57,7 +57,6 @@ textarea {
 
 .navbar {
   list-style-type: none;
-  padding: 0;
   margin: 0;
   display: flex;
   justify-content: left;
@@ -81,20 +80,9 @@ textarea {
   text-decoration: underline;
 }
 
-.entries-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
 .entry {
   margin-bottom: 1.5rem;
   border-radius: 5px;
-}
-
-.entry h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
 }
 
 .entry p {
@@ -119,11 +107,6 @@ textarea {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-}
-
-#entries-text {
-  margin: 0;
-  font-size: 1.5rem;
 }
 
 .new-entry-button {

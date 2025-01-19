@@ -21,39 +21,10 @@ const $imgPreview = document.querySelector('.img-placeholder');
 const $imgUrlInput = document.getElementById('url');
 const $titleInput = document.getElementById('title');
 const $notesInput = document.getElementById('notes');
-// checkk for query errors
+// check for query errors
 if (!$form || !$imgPreview || !$imgUrlInput || !$titleInput || !$notesInput) {
   throw new Error('query failed: missing DOM element');
 }
-$form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  // create a new entry
-  const newEntry = {
-    entryID: data.nextEntryId,
-    title: $titleInput.value,
-    imgUrl: $imgUrlInput.value,
-    notes: $notesInput.value,
-  };
-  // increment entry ID
-  data.nextEntryId++;
-  // add the new entry to the array
-  data.entries.unshift(newEntry);
-  // render the new entry in the list
-  const entriesList = document.querySelector('[data-view="entries"] ul');
-  const newEntryLi = renderEntry(newEntry);
-  entriesList.prepend(newEntryLi);
-  // display the entries view
-  viewSwap('entries');
-  // update the "no entries" message visibility
-  toggleNoEntries();
-  // save the updated data
-  writeData();
-  // clear and reset the form
-  $form.reset();
-  // reset the image preview
-  $imgPreview.src = './images/placeholder-image-square.jpg';
-  $imgPreview.alt = 'Preview image';
-});
 // render entry function
 function renderEntry(entry) {
   const li = document.createElement('li');
@@ -89,32 +60,72 @@ function toggleNoEntries() {
     noEntriesMessage.classList.add('hidden');
   }
 }
-// add event listener for DOMContentLoaded
+// handle form submission
+function handleFormSubmit(event) {
+  event.preventDefault();
+  // create a new entry
+  const newEntry = {
+    entryID: data.nextEntryId,
+    title: $titleInput.value,
+    imgUrl: $imgUrlInput.value,
+    notes: $notesInput.value,
+  };
+  // increment entry ID
+  data.nextEntryId++;
+  // add the new entry to the array
+  data.entries.unshift(newEntry);
+  // render the new entry in the list
+  const entriesList = document.querySelector('[data-view="entries"] ul');
+  const newEntryLi = renderEntry(newEntry);
+  entriesList.prepend(newEntryLi);
+  // display the entries view
+  viewSwap('entries');
+  // update the "no entries" message visibility
+  toggleNoEntries();
+  // save the updated data
+  writeData();
+  // clear and reset the form
+  $form.reset();
+  // reset the image preview
+  $imgPreview.src = './images/placeholder-image-square.jpg';
+  $imgPreview.alt = 'Preview image';
+}
+// handle image preview input
+function handleImagePreview() {
+  const url = $imgUrlInput.value;
+  // only update the image if the URL is valid
+  if (url) {
+    $imgPreview.src = url;
+    $imgPreview.alt = 'Preview image';
+  }
+}
+// event listeners
 document.addEventListener('DOMContentLoaded', () => {
   // Show the previously active view
   const previousView = data.view || 'entries';
   viewSwap(previousView);
-  // add event listener to the "New Entry" button
-  const newEntryButton = document.getElementById('new-entry-btn');
-  newEntryButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    viewSwap('entry-form');
-  });
-  // image preview
-  $imgUrlInput.addEventListener('input', () => {
-    const url = $imgUrlInput.value;
-    // only update the image if the URL is valid
-    if (url) {
-      $imgPreview.src = url;
-      $imgPreview.alt = 'Preview image';
-    }
-  });
+  // toggle "no entries" message
+  toggleNoEntries();
   // render existing entries on load
   const entriesList = document.querySelector('[data-view="entries"] ul');
   data.entries.forEach((entry) => {
     const entryLi = renderEntry(entry);
     entriesList.appendChild(entryLi);
   });
-  // toggle "no entries" message
-  toggleNoEntries();
 });
+// Event listener for the "New Entry" button
+const newEntryButton = document.getElementById('new-entry-btn');
+newEntryButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  viewSwap('entry-form');
+});
+// Event listener for the "Entries" navbar link
+const entriesLink = document.querySelector('.nav-link[href="#entries"]');
+entriesLink.addEventListener('click', (event) => {
+  event.preventDefault();
+  viewSwap('entries');
+});
+// Event listener for form submission
+$form.addEventListener('submit', handleFormSubmit);
+// Event listener for image preview input
+$imgUrlInput.addEventListener('input', handleImagePreview);
