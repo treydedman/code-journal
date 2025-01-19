@@ -1,7 +1,6 @@
 'use strict';
-// the viewSwap function to manage different views in the app
+// viewSwap function
 function viewSwap(viewName) {
-  // Hide all views
   const views = document.querySelectorAll('[data-view]');
   for (let i = 0; i < views.length; i++) {
     views[i].classList.add('hidden');
@@ -10,17 +9,8 @@ function viewSwap(viewName) {
   if (activeView) {
     activeView.classList.remove('hidden');
   }
-  // hide the navbar in the 'entry-form' view
-  const navbar = document.querySelector('#navbar');
-  if (viewName === 'entry-form') {
-    navbar?.classList.add('hidden'); // Hide navbar when on the new entry form
-  } else {
-    navbar?.classList.remove('hidden'); // Show navbar for other views
-  }
-  // update current view
   data.view = viewName;
-  writeData(); // Save the data to localStorage
-  // switch toggleNoEntries message
+  writeData();
   if (viewName === 'entries') {
     toggleNoEntries();
   }
@@ -31,50 +21,52 @@ const $imgPreview = document.querySelector('.img-placeholder');
 const $imgUrlInput = document.getElementById('url');
 const $titleInput = document.getElementById('title');
 const $notesInput = document.getElementById('notes');
-// check for query errors
-if (!$form) throw new Error('$form query failed');
-if (!$imgPreview) throw new Error('$imgPreview query failed');
-if (!$imgUrlInput) throw new Error('$imgUrlInput query failed');
-if (!$titleInput) throw new Error('$titleInput query failed');
-if (!$notesInput) throw new Error('$notesInput query failed');
-// add event listeners for DOM
-document.addEventListener('DOMContentLoaded', () => {
-  // Show the view that was previously active before the page refresh
-  const previousView = data.view || 'entries';
-  viewSwap(previousView);
-  toggleNoEntries();
-  // add event listener for the "New" button to show the entry form
-  const newEntryButton = document.getElementById('view-new-entry-link');
-  newEntryButton.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent the default action (link behavior)
-    viewSwap('entry-form'); // Switch to the new entry form view
-  });
-  // entries on load
+// checkk for query errors
+if (!$form || !$imgPreview || !$imgUrlInput || !$titleInput || !$notesInput) {
+  throw new Error('query failed: missing DOM element');
+}
+$form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  // create a new entry
+  const newEntry = {
+    entryID: data.nextEntryId,
+    title: $titleInput.value,
+    imgUrl: $imgUrlInput.value,
+    notes: $notesInput.value,
+  };
+  // increment entry ID
+  data.nextEntryId++;
+  // add the new entry to the array
+  data.entries.unshift(newEntry);
+  // render the new entry in the list
   const entriesList = document.querySelector('[data-view="entries"] ul');
-  // loop through the entries in data and append them to the entries list
-  for (let i = 0; i < data.entries.length; i++) {
-    const entry = data.entries[i];
-    const entryLi = renderEntry(entry);
-    entriesList.appendChild(entryLi);
-  }
-  // check if entries exist to toggle the "no entries" message
+  const newEntryLi = renderEntry(newEntry);
+  entriesList.prepend(newEntryLi);
+  // display the entries view
+  viewSwap('entries');
+  // update the "no entries" message visibility
   toggleNoEntries();
+  // save the updated data
+  writeData();
+  // clear and reset the form
+  $form.reset();
+  // reset the image preview
+  $imgPreview.src = './images/placeholder-image-square.jpg';
+  $imgPreview.alt = 'Preview image';
 });
-// renderEntry function to create the DOM tree
+// render entry function
 function renderEntry(entry) {
   const li = document.createElement('li');
-  // adding classes for layout
   li.classList.add('row', 'entry');
-  // image section to add column-half
+  // image
   const imgColumn = document.createElement('div');
   imgColumn.classList.add('column-half');
   const img = document.createElement('img');
   img.src = entry.imgUrl || './images/placeholder-image-square.jpg';
-  // use the title as the alt text
   img.alt = entry.title;
   img.classList.add('img-placeholder');
   imgColumn.appendChild(img);
-  // title and notes (column-half)
+  // Title and Notes section
   const textColumn = document.createElement('div');
   textColumn.classList.add('column-half');
   const title = document.createElement('h2');
@@ -83,46 +75,46 @@ function renderEntry(entry) {
   notes.textContent = entry.notes;
   textColumn.appendChild(title);
   textColumn.appendChild(notes);
-  // append both image and text columns to the list element
+  // append both image and text columns
   li.appendChild(imgColumn);
   li.appendChild(textColumn);
   return li;
 }
-// toggleNoEntries function to show or hide the "no entries" message
+// toggleNoEntries function
 function toggleNoEntries() {
-  const noEntriesMessage = document.querySelector(
-    '[data-view="entries"] .no-entries',
-  );
+  const noEntriesMessage = document.querySelector('#no-entries-message');
   if (data.entries.length === 0) {
     noEntriesMessage.classList.remove('hidden');
   } else {
     noEntriesMessage.classList.add('hidden');
   }
 }
-// update form submit event handler for new entry
-$form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  // create a new entry object
-  const newEntry = {
-    entryID: data.nextEntryId,
-    title: $titleInput.value,
-    imgUrl: $imgUrlInput.value,
-    notes: $notesInput.value,
-  };
-  // increment entry ID for next submission
-  data.nextEntryId++;
-  // add the new entry to the array of entries
-  data.entries.unshift(newEntry);
-  // render and prepend the new entry to the entries list
+// add event listener for DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Show the previously active view
+  const previousView = data.view || 'entries';
+  viewSwap(previousView);
+  // add event listener to the "New Entry" button
+  const newEntryButton = document.getElementById('new-entry-btn');
+  newEntryButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    viewSwap('entry-form');
+  });
+  // image preview
+  $imgUrlInput.addEventListener('input', () => {
+    const url = $imgUrlInput.value;
+    // only update the image if the URL is valid
+    if (url) {
+      $imgPreview.src = url;
+      $imgPreview.alt = 'Preview image';
+    }
+  });
+  // render existing entries on load
   const entriesList = document.querySelector('[data-view="entries"] ul');
-  const newEntryLi = renderEntry(newEntry);
-  entriesList.prepend(newEntryLi);
-  // display the "entries" view
-  viewSwap('entries');
+  data.entries.forEach((entry) => {
+    const entryLi = renderEntry(entry);
+    entriesList.appendChild(entryLi);
+  });
   // toggle "no entries" message
   toggleNoEntries();
-  // save updated data to localStorage
-  writeData();
-  // clear and reset the form
-  $form.reset();
 });

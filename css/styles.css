@@ -5,9 +5,14 @@ body {
 }
 
 header {
-  padding: 0.01rem;
   background-color: #4b2473;
-  color: white;
+  padding: 1rem 0;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
 }
 
 .img-placeholder {
@@ -48,60 +53,88 @@ textarea {
   background-color: #7b05e9;
 }
 
-ul,
-li {
-  margin: 0;
-  padding: 0;
-}
+/* begin issue 2 */
 
-#no-entries-message {
+.navbar {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  font-size: 1.5rem;
-  text-align: center;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 1rem;
 }
 
-#navbar {
+.nav-title {
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link {
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.entries-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.entry {
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+}
+
+.entry h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.entry p {
+  font-size: 1rem;
+}
+
+.entry img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+#no-entries-message {
+  text-align: center;
+  color: #656565;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+.entries-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  margin-bottom: 20px;
 }
 
-#navbar a {
-  text-decoration: none;
+#entries-text {
+  margin: 0;
   font-size: 1.5rem;
 }
 
-.button {
-  display: flex;
+.new-entry-button {
+  padding: 0.5rem 1rem;
   background-color: #4b2473;
   color: white;
-  padding: 0.5rem 0.75rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   text-decoration: none;
+  border-radius: 5px;
+  border: none;
 }
 
-.button:hover {
+.new-entry-button:hover {
   background-color: #7b05e9;
-}
-
-#navbar .new-button {
-  padding: 0.5rem 0.75rem;
-  font-size: 0.9rem;
-}
-
-#view-new-entry-link {
-  color: white;
-}
-
-#view-new-entry-link:hover,
-#view-new-entry-link:focus {
-  color: white;
 }

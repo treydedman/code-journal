@@ -18,17 +18,17 @@
   <body>
     <header>
       <div class="container" id="header">
-        <h1 class="column-full">Code Journal</h1>
+        <nav class="row">
+          <ul class="navbar column-full">
+            <li><a href="#" class="nav-title">Code Journal</a></li>
+            <li><a href="#entries" class="nav-link">Entries</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
     <main class="container">
-      <nav id="navbar" class="column-full">
-        <a href="#" id="viewEntriesLink" class="column-half">Entries</a>
-        <a href="#" id="view-new-entry-link" class="button new-button">NEW</a>
-      </nav>
-
-      <div data-view="entry-form" class="hidden">
-        <h1 class="column-full" id="new-entry-header">New Entry</h1>
+      <div data-view="entry-form">
+        <h2 class="column-full" id="new-entry-head">New Entry</h2>
         <form class="row">
           <div class="column-half">
             <img
@@ -44,20 +44,23 @@
           </div>
           <div class="column-full">
             <label for="notes">Notes</label>
-            <textarea id="notes" name="notes" rows="5" required></textarea>
+            <textarea id="notes" name="notes " rows="5" required></textarea>
           </div>
           <div class="column-full">
             <button type="submit" class="save-button">Save</button>
           </div>
         </form>
       </div>
+      <div data-view="entries" class="hidden">
+        <div class="entries-header">
+          <h2 class="column-full" id="entries-head">Entries</h2>
+          <a href="#" id="new-entry-btn" class="new-entry-button">NEW</a>
+        </div>
 
-      <div data-view="entries">
-        <ul>
-          <li id="no-entries-message" class="no-entries hidden">
-            No entries have been recorded
-          </li>
-        </ul>
+        <ul id="entries-list"></ul>
+        <p id="no-entries-message" class="hidden">
+          No entries have been recorded
+        </p>
       </div>
     </main>
     <script src="js/data.js"></script>
