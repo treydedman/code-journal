@@ -121,3 +121,27 @@ textarea {
 .new-entry-button:hover {
   background-color: #7b05e9;
 }
+
+/* begin issue 3 */
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title-container h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  flex-grow: 1;
+}
+
+.title-container i {
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.title-container i:hover {
+  color: #7b05e9;
+}
