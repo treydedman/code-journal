@@ -5,13 +5,14 @@ body {
 }
 
 header {
-  padding: 0.01rem;
   background-color: #4b2473;
-  color: white;
+  padding: 1rem 0;
 }
 
-#new-entry {
-  margin: 0.75rem 0;
+ul,
+li {
+  margin: 0;
+  padding: 0;
 }
 
 .img-placeholder {
@@ -49,5 +50,74 @@ textarea {
 }
 
 .save-button:hover {
+  background-color: #7b05e9;
+}
+
+/* begin issue 2 */
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-title {
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link {
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.entry {
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+}
+
+.entry p {
+  font-size: 1rem;
+}
+
+.entry img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+#no-entries-message {
+  text-align: center;
+  color: #656565;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+.entries-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.new-entry-button {
+  padding: 0.5rem 1rem;
+  background-color: #4b2473;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+}
+
+.new-entry-button:hover {
   background-color: #7b05e9;
 }
